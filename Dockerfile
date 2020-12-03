@@ -10,7 +10,7 @@ RUN npm run build
 
 RUN npm run migrate
 
-COPY ./build ./
+COPY . .
 
 ENV NODE_ENV=production
 

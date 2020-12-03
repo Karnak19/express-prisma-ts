@@ -10,7 +10,7 @@
     "migrate:save": "prisma migrate save --experimental",
     "migrate:up": "prisma migrate up --experimental",
     "migrate": "npm run migrate:up",
-    "start": "node index.js"
+    "start": "node build/index.js"
   },
   "keywords": [],
   "author": "",
