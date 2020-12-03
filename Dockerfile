@@ -2,6 +2,9 @@ FROM node:14.15
 
 WORKDIR /usr/src/app
 
+ARG DATABASE_URL=${DATABASE_URL}
+ARG PORT=${PORT}
+
 COPY package*.json ./
 
 RUN npm install
@@ -9,12 +12,11 @@ RUN npm install
 COPY . .
 
 RUN npm run build
-
 RUN npm run migrate
-
+RUN npm run generate
 
 ENV NODE_ENV=production
 
-EXPOSE 5000
+EXPOSE ${PORT}
 
 CMD [ "npm", "start" ]
