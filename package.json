@@ -10,8 +10,7 @@
     "migrate:save": "prisma migrate save --experimental",
     "migrate:up": "prisma migrate up --experimental",
     "migrate": "npm run migrate:up",
-    "start": "node build/index.js",
-    "prestart": "npm run build && npm run migrate"
+    "start": "node index.js"
   },
   "keywords": [],
   "author": "",
@@ -19,6 +18,7 @@
   "dependencies": {
     "@prisma/client": "^2.12.1",
     "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "morgan": "^1.10.0"
   },
