@@ -2,7 +2,6 @@ FROM node:14.15
 
 WORKDIR /usr/src/app
 
-ARG DATABASE_URL=${DATABASE_URL}
 ARG PORT=${PORT}
 
 COPY package*.json ./
