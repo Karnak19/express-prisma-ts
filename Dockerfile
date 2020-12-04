@@ -16,6 +16,7 @@ ARG PORT=${PORT}
 ENV PORT=${PORT}
 ARG DATABASE_URL=${DATABASE_URL}
 ENV DATABASE_URL=${DATABASE_URL}
+COPY --from=builder /usr/src/app/package*.json ./
 RUN npm install --production
 COPY --from=builder /usr/src/app/build ./build
 COPY --from=builder usr/src/app/node_modules/@prisma/client ./node_modules/@prisma/client
