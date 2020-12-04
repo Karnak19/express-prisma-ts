@@ -26,18 +26,18 @@ EXPOSE ${PORT}
 CMD ["./run.sh"]
 
 
-FROM node:14.15
-WORKDIR /usr/src/app
-ARG PORT=${PORT}
-ENV PORT=${PORT}
-ARG DATABASE_URL=${DATABASE_URL}
-ENV DATABASE_URL=${DATABASE_URL}
-RUN npm install --production
-COPY --from=builder /usr/src/app/build ./build
-COPY --from=builder usr/src/app/node_modules/@prisma/client ./node_modules/@prisma/client
-ENV NODE_ENV=production
-EXPOSE ${PORT}
-CMD [ "npm", "start" ]
+# FROM node:14.15
+# WORKDIR /usr/src/app
+# ARG PORT=${PORT}
+# ENV PORT=${PORT}
+# ARG DATABASE_URL=${DATABASE_URL}
+# ENV DATABASE_URL=${DATABASE_URL}
+# RUN npm install --production
+# COPY --from=builder /usr/src/app/build ./build
+# COPY --from=builder usr/src/app/node_modules/@prisma/client ./node_modules/@prisma/client
+# ENV NODE_ENV=production
+# EXPOSE ${PORT}
+# CMD [ "npm", "start" ]
 
 
 
