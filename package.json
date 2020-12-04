@@ -12,7 +12,8 @@
     "migrate": "npm run migrate:up",
     "generate": "prisma generate",
     "start": "node build/index.js",
-    "studio": "prisma studio"
+    "studio": "prisma studio",
+    "prestart": "npm run migrate"
   },
   "keywords": [],
   "author": "",

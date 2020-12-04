@@ -1,12 +1,7 @@
 FROM node:14 as builder
 WORKDIR /usr/src/app
-ARG PORT=${PORT}
-ENV PORT=${PORT}
-ARG DATABASE_URL=${DATABASE_URL}
-ENV DATABASE_URL=${DATABASE_URL}
 COPY . .
 RUN npm install
-RUN npx prisma generate
 RUN npm run build
 
 
@@ -16,11 +11,12 @@ ARG PORT=${PORT}
 ENV PORT=${PORT}
 ARG DATABASE_URL=${DATABASE_URL}
 ENV DATABASE_URL=${DATABASE_URL}
-COPY --from=builder /usr/src/app/package*.json ./
-RUN npm install --production
-COPY --from=builder /usr/src/app/build ./build
-COPY --from=builder usr/src/app/node_modules/@prisma/client ./node_modules/@prisma/client
 ENV NODE_ENV=production
+COPY --from=builder /usr/src/app/package*.json ./
+COPY --from=builder /usr/src/app/build ./build
+COPY --from=builder /usr/src/app/prisma ./prisma
+RUN npm install --production
+RUN npx prisma generate
 EXPOSE ${PORT}
 CMD [ "npm", "start" ]
 
