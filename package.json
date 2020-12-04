@@ -11,7 +11,8 @@
     "migrate:up": "prisma migrate up --experimental",
     "migrate": "npm run migrate:up",
     "generate": "prisma generate",
-    "start": "node build/index.js"
+    "start": "node index.js",
+    "studio": "prisma studio"
   },
   "keywords": [],
   "author": "",
