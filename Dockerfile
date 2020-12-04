@@ -5,8 +5,9 @@ ENV PORT=${PORT}
 ARG DATABASE_URL=${DATABASE_URL}
 ENV DATABASE_URL=${DATABASE_URL}
 COPY . .
-RUN chmod +x /usr/src/app/run.sh
-RUN run.sh
+RUN npm install
+RUN npx prisma generate
+RUN npm run build
 
 
 FROM node:14.15
