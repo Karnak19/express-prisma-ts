@@ -1,43 +1,26 @@
-# FROM node:14 as builder
-# WORKDIR /usr/src/app
-# ARG PORT=${PORT}
-# ENV PORT=${PORT}
-# ARG DATABASE_URL=${DATABASE_URL}
-# ENV DATABASE_URL=${DATABASE_URL}
-# COPY . .
-# RUN npm install
-# RUN npx prisma migrate up --experimental
-# RUN npx prisma generate
-# RUN npm run build
-
-FROM node:12 as builder
+FROM node:14 as builder
 WORKDIR /usr/src/app
 ARG PORT=${PORT}
 ENV PORT=${PORT}
 ARG DATABASE_URL=${DATABASE_URL}
 ENV DATABASE_URL=${DATABASE_URL}
 COPY . .
-RUN npm install
-
 RUN chmod +x /usr/src/app/run.sh
+RUN run.sh
 
+
+FROM node:14.15
+WORKDIR /usr/src/app
+ARG PORT=${PORT}
+ENV PORT=${PORT}
+ARG DATABASE_URL=${DATABASE_URL}
+ENV DATABASE_URL=${DATABASE_URL}
+RUN npm install --production
+COPY --from=builder /usr/src/app/build ./build
+COPY --from=builder usr/src/app/node_modules/@prisma/client ./node_modules/@prisma/client
+ENV NODE_ENV=production
 EXPOSE ${PORT}
-
-CMD ["./run.sh"]
-
-
-# FROM node:14.15
-# WORKDIR /usr/src/app
-# ARG PORT=${PORT}
-# ENV PORT=${PORT}
-# ARG DATABASE_URL=${DATABASE_URL}
-# ENV DATABASE_URL=${DATABASE_URL}
-# RUN npm install --production
-# COPY --from=builder /usr/src/app/build ./build
-# COPY --from=builder usr/src/app/node_modules/@prisma/client ./node_modules/@prisma/client
-# ENV NODE_ENV=production
-# EXPOSE ${PORT}
-# CMD [ "npm", "start" ]
+CMD [ "npm", "start" ]
 
 
 
