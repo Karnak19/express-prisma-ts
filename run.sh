@@ -1,4 +1,4 @@
-cd /usr/src/app
-npx prisma migrate up --experimental
-npx prisma generate
-npm run build
+npx prisma migrate up --experimental ./build
+npx prisma generate ./build
+
+npm start
