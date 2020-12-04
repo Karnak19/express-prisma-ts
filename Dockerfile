@@ -6,8 +6,8 @@ ARG DATABASE_URL=${DATABASE_URL}
 ENV DATABASE_URL=${DATABASE_URL}
 COPY . .
 RUN npm install
-RUN npm run migrate
-RUN npm run generate
+RUN npx prisma migrate up --experimental
+RUN npx prisma generate
 RUN npm run build
 
 
